@@ -9,6 +9,7 @@ resource "aws_s3_bucket" "regular_bucket" {
   tags = {
     Name        = "${local.resource_prefix.value}-data"
     Environment = local.resource_prefix.value
+    yor_trace   = "efc17d3c-7164-450f-a514-fa8ddf40bca2"
   }
 }
 
@@ -18,14 +19,14 @@ resource "aws_something_else" "x" {
 
 module "mod" {
   source = "./module"
-  x = "abc"
+  x      = "abc"
 }
 
 module "mod2" {
   source = "./module"
-  x = "xyz"
+  x      = "xyz"
 }
-  
+
 module "iam_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
   version = "~> 4.3"
@@ -51,7 +52,7 @@ EOF
 }
 
 module "dynamodb_table" {
-  source   = "terraform-aws-modules/dynamodb-table/aws"
+  source = "terraform-aws-modules/dynamodb-table/aws"
 
   name     = "my-table"
   hash_key = "id"
@@ -66,13 +67,14 @@ module "dynamodb_table" {
   tags = {
     Terraform   = "true"
     Environment = "staging"
+    yor_trace   = "e643841f-5b9b-411e-994d-c305774fde4f"
   }
 
   server_side_encryption_enabled = false
 }
 
 module "dynamodb_table2" {
-  source   = "terraform-aws-modules/dynamodb-table/aws"
+  source = "terraform-aws-modules/dynamodb-table/aws"
 
   name     = "my-table2"
   hash_key = "id2"
@@ -87,6 +89,7 @@ module "dynamodb_table2" {
   tags = {
     Terraform   = "true2"
     Environment = "staging2"
+    yor_trace   = "af19dd39-0ac4-4658-a10f-31b2cb177d40"
   }
 
   server_side_encryption_enabled = false
